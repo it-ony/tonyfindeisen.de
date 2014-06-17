@@ -15,7 +15,8 @@ module.exports = function (grunt) {
                     serve: true,
                     watch: true,
                     drafts: true,
-                    safe: true
+                    safe: true,
+                    config: "_config.yml,_config-dev.yml"
                 }
             }
         },
