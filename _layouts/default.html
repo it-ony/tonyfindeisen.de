@@ -28,5 +28,9 @@
     ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
     ga('send', 'pageview');
 </script>
+
+{% if site.config.dev == true %}
+<script src="/js/cssrefresh.js" async="async"></script>
+{% endif %}
 </body>
 </html>
