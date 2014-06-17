@@ -1,0 +1,30 @@
+{
+  "name": "tonyfindeisen.de",
+  "version": "0.1.0",
+  "description": "website of tony findeisen",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/it-ony/tonyfindeisen.de.git"
+  },
+  "author": "Tony Findeisen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/it-ony/tonyfindeisen.de/issues"
+  },
+  "homepage": "https://github.com/it-ony/tonyfindeisen.de",
+  "devDependencies": {
+    "grunt-sass": "~0.13.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt": "~0.4.5",
+    "node-sass": "~0.9.3",
+    "grunt-jekyll": "~0.4.2",
+    "grunt-concurrent": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-autoprefixer": "~0.7.5",
+    "grunt-contrib-uglify": "~0.5.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "tonyfindeisen.de",
+  "version": "0.1.0",
+  "homepage": "https://github.com/it-ony/tonyfindeisen.de",
+  "authors": [
+    "Tony Findeisen <github@it-ony.de>"
+  ],
+  "description": "website of tony findeisen",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.2.3",
+    "modernizr": "~2.8.2"
+  }
+}
