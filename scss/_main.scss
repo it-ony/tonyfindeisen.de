@@ -1,0 +1,92 @@
+@import "settings";
+
+html, body {
+  min-height: 100%;
+  height: auto;
+}
+
+q {
+  font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(85, 85, 85);
+  line-height: 1.5;
+  margin: 1em 0;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+  margin: 0.5em 0;
+}
+
+#wrapper {
+  min-height: 100%;
+}
+
+section {
+  padding: 2em 0 4em;
+}
+
+.product {
+  margin-top: 5em;
+  margin-bottom: 5em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0
+}
+
+p {
+  margin: 0.5em 0;
+  line-height: 1.5em;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+.logo {
+  font-weight: 200;
+  padding-left: 2em;
+
+  &:before {
+    content: "\54";
+    padding-right: 0.25em;
+    font-weight: 700;
+    font-size: 0.8em;
+    font-family: 'icon';
+    color: $primary-color;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.contrast {
+  background: $lightGray;
+}
+
+.center-for-small {
+  @media #{$small-only} {
+    text-align: center;
+  }
+}
+

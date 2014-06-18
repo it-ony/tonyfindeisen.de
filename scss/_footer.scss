@@ -1,0 +1,25 @@
+@import "settings";
+
+footer {
+  // pushs footer always to bottom
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  background: $dark;
+  color: $gray;
+  font-size: 0.75em;
+
+  a {
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 1em;
+  }
+}

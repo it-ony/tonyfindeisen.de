@@ -1,0 +1,63 @@
+#home {
+  h1 {
+    text-align: center;
+  }
+
+  .info {
+    border-top: 1px solid lightgray;
+    padding: 1em 0;
+    margin: 1em 0;
+    font-weight: bold;
+
+    @media #{$small-only} {
+      margin: 1em 5em;
+    }
+
+  }
+
+}
+
+#contact {
+
+  img {
+    display: inline-block;
+    margin-bottom: 1em;
+  }
+
+  h3, p {
+    margin: 0;
+  }
+
+  .icons {
+    font-family: "icon";
+    font-size: 2em;
+
+    a {
+      border-radius: 100%;
+      color: $gray;
+
+      .no-touch &:hover {
+        color: $primary-color;
+      }
+    }
+
+  }
+
+  .map a {
+    font-size: 2em;
+    display: block;
+    padding-bottom: 0.5em;
+  }
+
+  a {
+    padding: 0 0.5em;
+  }
+
+  @media #{$small-only} {
+    .medium-4 {
+      margin: 2em 0;
+    }
+  }
+
+
+}
