@@ -2,12 +2,14 @@
 layout: default
 ---
 
-<h1>Test Bar</h1>
+<div id="teaser">
+    <h1>Test Bar</h1>
+</div>
 
 {% include menu.html %}
 
 <div id="home">
-    <section id="main" class="contrast">
+    <section id="about" class="contrast">
         <h1>I love the web.</h1>
 
         <div class="row centered-text">
@@ -146,3 +148,73 @@ layout: default
         </div>
     </section>
 </div>
+
+<script type="text/javascript">
+    (function(window, document, undefined) {
+        // I know, this javascript will work just in modern browsers,
+        // but it is 00:50 and jQuery is not an option
+
+        var ids = ["about", "portfolio", "contact"],
+            menuItems = {},
+            targets = [],
+            menu = document.getElementById("menu"),
+            body = document.body || document.getElementsByTagName("body")[0],
+            teaser = document.getElementById("teaser"),
+            menuHeight = 80;
+
+        if (!document.querySelectorAll) {
+            return;
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll("#menu a")).forEach(function(a) {
+            var match = /#(\w+)\b/.exec(a.href);
+            if (match) {
+                menuItems[match[1]] = a;
+            }
+        });
+
+        ids.forEach(function(id) {
+            var el = document.getElementById(id);
+            el && targets.push(el);
+        });
+
+        selectActiveMenu(window.scrollY);
+
+        window.onscroll = function(e) {
+            menuFixed();
+            selectActiveMenu();
+        }
+
+        function menuFixed() {
+            if (!teaser) {
+                return;
+            }
+
+            body.className = teaser.getBoundingClientRect().bottom < 0 ? "menu-fixed" : "";
+        }
+
+        function selectActiveMenu() {
+            var activeElement,
+                min;
+
+            targets.forEach(function(target) {
+                var rect = target.getBoundingClientRect();
+                if (rect && rect.top <= menuHeight) {
+                    // target is scrolled over view
+                    if (min === undefined || rect.top > min) {
+                        activeElement = target;
+                        min = rect.top;
+                    }
+                }
+            });
+
+            for (var key in menuItems) {
+                if (menuItems.hasOwnProperty(key)) {
+                    menuItems[key].className = (activeElement && activeElement.getAttribute("id") === key ? "active" : "");
+                }
+            }
+
+        }
+
+    })(window, document);
+</script>
