@@ -3,7 +3,12 @@ layout: default
 ---
 
 <div id="teaser">
-    <h1>Test Bar</h1>
+    <div class="container">
+        <div class="statement">
+            <h1>I'm passionate about web applications with clean and usable design.</h1>
+            <p>Tony Findeisen</p>
+        </div>
+    </div>
 </div>
 
 {% include menu.html %}
@@ -178,7 +183,8 @@ layout: default
             el && targets.push(el);
         });
 
-        selectActiveMenu(window.scrollY);
+        selectActiveMenu();
+        menuFixed();
 
         window.onscroll = function(e) {
             menuFixed();
