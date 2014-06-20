@@ -1,0 +1,18 @@
+<p class="imprint">
+    <script type="text/javascript">
+        (function () {
+
+            var a = "Vml{'02Dklfgkqgl'5ANwfuke/Gpjcpf/Qvpc'FDg'027'5A26321'02Ngkrxke'5AG/Ockn'1C'02imlvcivBvml{dklfgkqgl,fg'5AVgngdml'1C'022163'02046'0210'02332",
+                    b = "",
+                    clean;
+
+            clean = a.length;
+            for (var i = 0; i < clean; i++) {
+                b += String.fromCharCode(a.charCodeAt(i) ^ 2)
+            }
+
+            document.write(unescape(b).split("|").join("<br />"));
+        })();
+
+    </script>
+</p>
