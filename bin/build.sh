@@ -36,6 +36,6 @@ ln -s ${REPO} ${REPOSITORY}/latest
 echo ${VERSION} > /local/version/tonyfindeisen.de.version
 
 if [ ${USER} == "jenkins" ]; then
-    sudo /local/www/tonyfindeisen.de/bin/updateSite bwta ${VERSION}
+    sudo /local/www/tonyfindeisen.de/bin/updateSite live ${VERSION}
 fi
 
