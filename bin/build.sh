@@ -22,6 +22,7 @@ git reset --hard HEAD > /dev/null
 # git pull master master
 
 npm install > /dev/null
+bower install > /dev/null
 
 #sass --update scss/app.scss:css/style.css
 grunt build
