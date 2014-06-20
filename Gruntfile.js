@@ -102,7 +102,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('build', ['uglify:dist', 'sass:dist', 'autoprefixer:dist', 'cssmin:dist']);
+    grunt.registerTask('build', ['uglify:dist', 'sass:dist', 'autoprefixer:dist', 'cssmin:dist', 'jekyll:dist']);
     grunt.registerTask('publish', ['build', 'jekyll:dist']);
     grunt.registerTask('default', ['build', 'concurrent:dev']);
 };
