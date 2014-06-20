@@ -3,14 +3,28 @@
 html, body {
   min-height: 100%;
   height: auto;
+
+  color: rgb(85, 85, 85);
 }
+
+html {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: visible;
+
+  @media #{$small-only} {
+    font-size: 60%;
+  }
+}
+
 
 q {
   font-style: italic;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: rgb(85, 85, 85);
+
   line-height: 1.5;
   margin: 1em 0;
   font-weight: 200;
@@ -25,8 +39,13 @@ h2 {
   margin: 0.5em 0;
 }
 
+h3 {
+  font-weight: 500;
+}
+
 #wrapper {
   min-height: 100%;
+  padding-bottom: 3em;
 }
 
 section {
@@ -39,6 +58,12 @@ section {
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media #{$medium-up} {
+    img {
+      margin-top: 3em;
+    }
   }
 }
 
