@@ -10,6 +10,7 @@ footer {
   color: $gray;
   padding: 1em;
   margin-top: 3em;
+  line-height: 2em;
 //  font-size: 0.75em;
 
   a {
@@ -23,5 +24,9 @@ footer {
   li {
     display: inline-block;
     margin-left: 1em;
+  }
+
+  .icon-logo {
+    font-size: 2em;
   }
 }
