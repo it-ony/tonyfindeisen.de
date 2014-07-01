@@ -1,15 +1,10 @@
 @import "settings";
 
 footer {
-  // pushs footer always to bottom
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 
   background: $dark;
   color: $gray;
   padding: 1em;
-  margin-top: 3em;
   line-height: 2em;
 //  font-size: 0.75em;
 
