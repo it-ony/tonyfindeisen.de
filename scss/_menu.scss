@@ -30,7 +30,7 @@
     display: inline-block;
   }
 
-  a:active, a.active {
+  a.active {
     background: $primary-color;
     color: white;
   }

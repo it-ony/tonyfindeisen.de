@@ -2,3 +2,4 @@ name: Tony Findeisen
 markdown: redcarpet
 pygments: true
 exclude: [scss, bin, Gruntfile.js, bower_components, node_modules, package.json, bower.json, README.md, "*.iml"]
+permalink: /blog/:title

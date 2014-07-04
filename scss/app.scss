@@ -1,8 +1,11 @@
 @import "settings";
 @import "../bower_components/foundation/scss/foundation/components/grid";
+@import "../bower_components/foundation/scss/foundation/components/visibility";
 
 @import "main";
 @import "menu";
 @import "home";
 @import "footer";
+@import "blog";
 @import "font";
+@import "syntax";

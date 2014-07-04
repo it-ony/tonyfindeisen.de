@@ -9,6 +9,10 @@
 
   position: relative;
 
+  @media #{$small-only} {
+    font-size: 60%;
+  }
+
   //  background-position: -300px 0;
 
   @media #{$small-only} {
@@ -69,6 +73,8 @@
   img {
     display: inline-block;
     margin-bottom: 1em;
+    max-width: 250px;
+    width: 100%;
   }
 
   h3, p {

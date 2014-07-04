@@ -14,7 +14,7 @@ html {
   overflow: visible;
 
   @media #{$small-only} {
-    font-size: 60%;
+//    font-size: 90%;
   }
 }
 
@@ -73,7 +73,7 @@ ul {
 }
 
 p {
-  margin: 0.5em 0;
+  margin: 1em 0;
   line-height: 1.5em;
 }
 

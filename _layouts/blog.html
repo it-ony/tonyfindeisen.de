@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+{% include menu.html %}
+
+<div id="blog">
+
+    {% if page.sidebar  %}
+    <div class="row with-sidebar">
+        <div class="medium-3 sidebar column show-for-medium-up">
+            <div class="boxed">
+                <div id="contact">
+                    <img src="/img/tonyfindeisen.png" alt="Tony Findeisen">
+                    <h3>Tony Findeisen</h3>
+                    <p>Senior Frontend Developer</p>
+                </div>
+            </div>
+        </div>
+        <div class="medium-9 column">
+            {{ content }}
+        </div>
+    </div>
+    {% else %}
+        <div class="row">
+            <div class="column">{{ content }}</div>
+        </div>
+    {% endif %}
+</div>
+

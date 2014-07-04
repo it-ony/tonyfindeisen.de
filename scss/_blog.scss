@@ -1,0 +1,54 @@
+@import "settings";
+
+#blog {
+  background: $lightGray;
+  padding: 3em 0;
+
+  .boxed {
+    background: white;
+    padding: 1em;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+  }
+
+  .sidebar {
+    float: right;
+  }
+}
+
+.with-sidebar {
+  .post {
+    margin-bottom: 3em;
+  }
+}
+
+.post {
+  line-height: 1.5em;
+
+  li {
+    margin: 1em 0;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ul, ol {
+    padding-left: 2em;
+  }
+
+  pre {
+
+    line-height: 1.15em;
+    overflow: auto;
+
+    max-height: 400px;
+    padding: 1em;
+
+    position: relative;
+    border: 1px solid #e4e4e4;
+    background: $lightGray;
+    border-radius: 5px;
+  }
+
+}
