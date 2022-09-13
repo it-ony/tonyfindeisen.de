@@ -1,0 +1,321 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tony Findeisen</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <div id="teaser">
+    <div class="container">
+        <div class="statement">
+            <h1>I'm passionate about web applications with clean and usable design.</h1>
+            <p>Tony Findeisen</p>
+        </div>
+    </div>
+</div>
+
+<nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="home">
+    <section id="about" class="contrast">
+        <h1>I love the web.</h1>
+
+        <div class="row centered-text">
+            <div class="medium-4 column">
+                <h3>Who I am</h3>
+                <p>
+                    I'm a javascript fullstack developer
+                    living with my daughter in Leipzig
+                    <!--I'm a 27 old, Leipzig based javascript fullstack developer-->
+                </p>
+            </div>
+            <div class="medium-4 column">
+                <h3>What I do</h3>
+                <p>
+                    I create rich web applications with
+                    an eye for the user and design
+                </p>
+            </div>
+            <div class="medium-4 column">
+                <h3>Why I do it</h3>
+                <p>
+                    I love to solve complex problems and like creating
+                    new products.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="center-for-small">
+        <h1>Things I made.</h1>
+
+        <div class="row product">
+            <div class="large-8 medium-6 column right">
+                <img src="/img/rappidjs.png" alt="rappidjs js mvc framework"/>
+            </div>
+            <div class="large-4 medium-6 column">
+                <h2>&lt;rAppid.js /&gt;</h2>
+
+                <p>
+                    The base for all my web developments is a
+                    declarative Javascript MVC with components and bindings.
+
+                    <q>It's like Flex or Silverlight for HTML5</q> and like
+                    web components you can use today.
+                </p>
+                <p>
+                    <a href="https://github.com/krebbl" target="_blank">Marcus</a> and me started it
+                    in Februar 2012 and continously improved it. Now it even has a
+                    server side and is handled as one of the <a href="http://www.infoq.com/research/top-javascript-mvc-frameworks" target="_blank">Top 20</a> JS Frameworks.
+                </p>
+
+                <div class="info">
+                    <a href="http://www.rappidjs.com">http://www.rappidjs.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product">
+            <div class="large-8 medium-6 column">
+                <img src="/img/tablomat.png" alt="Tablomat"/>
+            </div>
+            <div class="large-4 medium-6 column">
+                <h2>Tablomat</h2>
+
+                <p>
+                    The Tablomat is an HTML5 based T-Shirt Designer, replacing the
+                    current <a href="http://www.spreadshirt.net/-C59?designer=CNG">Flash based Designer</a> at Spreadshirt.
+                </p>
+                <p>
+                    The project was initiated by me by adapting the look and feel of the
+                    Flash application. Fast it became <a href="http://blog.spreadshirt.net/press-eu/2013/09/17/spreadshirt-launches-touch-optimised-t-shirt-designer-in-uk/" target="_blank">important for Spreadshirt</a>
+                    and we changed the <a href="http://www.itswhite.co.uk/tablomat.html" target="_blank">UX and UI</a> to fit to tablets (and also phones).
+                </p>
+
+                <div class="info">
+                    <a href="http://www.spreadshirt.net/-C59?tablomat" target="_blank">Tablomat (full screen)</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product">
+            <div class="large-8 medium-6 column right">
+                <img src="/img/writehub.png" alt="Writehub"/>
+            </div>
+            <div class="large-4 medium-6 column">
+                <h2>Writehub</h2>
+
+                <p>
+                    <q>Writehub is an online text processor that sets the focus back to writing.
+                    Formatting and layouting is done by Writehub resulting in a good looking PDF.</q>
+                </p>
+                <p>
+                    The app converts markdown into xml, which gets
+                    transformed via XSLT to XSL-FO outputting a PDF document. The invention is
+                    that the document style is written in CSS which is than
+                    applied to the XSL-FO before processing.
+                </p>
+
+                <div class="info">
+                    <a href="http://writehub.de/" target="_blank">Writehub.de</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product">
+            <div class="medium-6 column left">
+                <img src="/img/checkout.png" alt="Checkout"/>
+            </div>
+            <div class="medium-6 column">
+                <h2>Single Page Checkout</h2>
+
+                <p>
+                    In November 2014 my Team started to replace the Checkout at Spreadshirt with a reponsive
+                    Single-Page application checkout and the conversion increased dramatically.
+                    In 2015 we finished the migration and started to implement also Pay with Amazon as a 3rd
+                    party checkout.
+                </p>
+
+                <p>
+                    The project started by building a secure checkout API first. With rAppid.js we then created
+                    a flexible and extendible frontend so that new payment methods can be integrated easily. As
+                    in a checkout sensitive data is entered we integrated CSP and made use of sandboxing 3rd party
+                    scripts.
+                </p>
+
+                <div class="info">
+                    <a href="https://checkout.spreadshirt.co.uk/" target="_blank">Checkout</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact" class="contrast">
+        <div class="row centered-text">
+            <h1>Say hello.</h1>
+        </div>
+
+        <div class="row centered-text">
+            <div class="medium-4 column">
+                <img src="img/tonyfindeisen.png" alt="Tony Findeisen"/>
+
+                <h3>Tony Findeisen</h3>
+
+                <p>Frontend Architect</p>
+
+                <p><a href="mailto:kontakt@tonyfindeisen.de">kontakt@tonyfindeisen.de</a>
+                </p>
+            </div>
+            <div class="medium-4 column icons">
+                <a href="https://twitter.com/tonyfindeisen">t</a>
+                <a href="https://github.com/it-ony">g</a>
+                <a href="https://www.xing.com/profile/Tony_Findeisen">x</a>
+            </div>
+            <div class="medium-4 column map">
+                <a class="icon-location" href="https://www.google.de/maps/place/Ludwig-Erhard-Stra%C3%9Fe+5/@51.33998,12.39498,17z"></a>
+
+                <p>
+                    Ludwig-Erhard-Straße 5<br/>
+                    04103, Leipzig, Germany
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    (function(window, document, undefined) {
+        // I know, this javascript will work just in modern browsers,
+        // but it is 00:50 and jQuery is not an option
+
+        var ids = ["about", "portfolio", "contact"],
+            menuItems = {},
+            targets = [],
+            menu = document.getElementById("menu"),
+            body = document.body || document.getElementsByTagName("body")[0],
+            teaser = document.getElementById("teaser"),
+            menuHeight = 80;
+
+        if (!document.querySelectorAll) {
+            return;
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll("#menu a")).forEach(function(a) {
+            var match = /#(\w+)\b/.exec(a.href);
+            if (match) {
+                menuItems[match[1]] = a;
+            }
+        });
+
+        ids.forEach(function(id) {
+            var el = document.getElementById(id);
+            el && targets.push(el);
+        });
+
+        selectActiveMenu();
+        menuFixed();
+
+        window.onscroll = function(e) {
+            menuFixed();
+            selectActiveMenu();
+        }
+
+        function menuFixed() {
+            if (!teaser) {
+                return;
+            }
+
+            body.className = teaser.getBoundingClientRect().bottom < 0 ? "menu-fixed" : "";
+        }
+
+        function selectActiveMenu() {
+            var activeElement,
+                min;
+
+            targets.forEach(function(target) {
+                var rect = target.getBoundingClientRect();
+                if (rect && rect.top <= menuHeight) {
+                    // target is scrolled over view
+                    if (min === undefined || rect.top > min) {
+                        activeElement = target;
+                        min = rect.top;
+                    }
+                }
+            });
+
+            for (var key in menuItems) {
+                if (menuItems.hasOwnProperty(key)) {
+                    menuItems[key].className = (activeElement && activeElement.getAttribute("id") === key ? "active" : "");
+                }
+            }
+
+        }
+
+    })(window, document);
+</script>
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

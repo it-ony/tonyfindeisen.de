@@ -1,0 +1,197 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RSL dynamisch zur Laufzeit laden in AS3</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>RSL dynamisch zur Laufzeit laden in AS3</h1>
+
+    <p>In FlexBuilder 3 können AS3-Anwendungen erstellt werden, welche eine Bibliothek (RSL) 
+zur Laufzeit nachladen. Die Runtime Shared Libray liegt als SWC vor und wird automatisch 
+beim initialisieren der Anwendung geladen.</p>
+
+<p>In Flash CS4 gibt zwar die Möglichkeit externe Bilbiotheken zu &quot;linken&quot; - das Laden 
+übernimmt der FlashPlayer jedoch nicht. Folgende Möglichkeiten gibt es externe 
+Bibliotheken in Flash einzubinden:</p>
+
+<ol>
+<li>Wird eine RSL in den Bibliothekspfad aufgenommen werden alle in dem Projekt verwendeten 
+Klassen während der Veröffentlichung in die SWF-Datei mit ein kompiliert.</li>
+<li>Bei der Verwendung der Einstellung Pfad zu externen Bibliotheken prüft der Kompiler das 
+Vorhandensein der entsprechenden Klassen kompiliert diese jedoch nicht in die SWF-Datei 
+ein.</li>
+</ol>
+
+<p>Bei der ersten Variante können alle im Projekt verwendeten Klassen zur Laufzeit erzeugt 
+werden. Wird die Bibliothek als externe Bibliothek eingebunden oder eine Klasse dynamisch 
+instanziiert, welche in dem Projekt nicht benutzt schlägt die Erstellung der Instanz fehl.</p>
+<div class="highlight"><pre><code class="as3 language-as3" data-lang="as3"><span class="k">import</span> <span class="nn">de.it</span><span class="o">-</span><span class="n">ony</span><span class="o">.</span><span class="na">as3</span><span class="o">.</span><span class="na">classInRSL</span><span class="o">;</span>
+<span class="k">import</span> <span class="nn">de.it</span><span class="o">-</span><span class="n">ony</span><span class="o">.</span><span class="na">as3</span><span class="o">.</span><span class="na">classInRSLunused</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="n">test</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="n">test</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="kd">var</span> <span class="n">c1</span><span class="p">:</span><span class="kt">classInRSL</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">classInRSL</span><span class="o">();</span>
+        <span class="kd">var</span> <span class="n">c2</span><span class="p">:</span><span class="kt">classInRSL</span> <span class="o">=</span> <span class="n">createInstance</span><span class="o">(</span><span class="s2">&quot;de.it-ony.as3.classInRSL&quot;</span><span class="o">);</span>
+
+        <span class="kd">var</span> <span class="n">c3</span><span class="p">:</span><span class="kt">Object</span> <span class="o">=</span> <span class="n">createInstance</span><span class="o">(</span><span class="s2">&quot;de.it-ony.as3.classInRSLunused&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">createInstance</span><span class="o">(</span><span class="n">className</span><span class="o">:</span><span class="n">String</span><span class="o">):</span><span class="n">Object</span>
+    <span class="o">{</span>
+        <span class="kd">var</span> <span class="n">class</span><span class="p">:</span><span class="kt">Class</span> <span class="o">=</span> <span class="n">getDefinitionByName</span><span class="o">(</span><span class="n">str</span><span class="o">)</span> <span class="k">as</span> <span class="n">Class</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="kt">class</span><span class="o">();</span> 
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<h2>Bibliothek laden</h2>
+
+<p>Um Klassen aus externen Bibliotheken benutzen in der eigenen Anwendung nutzen zu können 
+muss diese in die ApplicationDomain geladen werden. In dem folgenden Quellcode wird über 
+die Loader-Klasse eine SWF in die aktuelle ApplicationDomain geladen. Die Events zur 
+Verarbeitung von Fehlern und  zur Reaktion auf eine vollständig geladene Bibliothek 
+müssen natürlich behandelt werden.</p>
+<div class="highlight"><pre><code class="as3 language-as3" data-lang="as3"><span class="kd">private</span> <span class="kd">function </span><span class="nf">loadRSL</span><span class="o">(</span><span class="n">source</span><span class="o">:</span><span class="kt">String</span><span class="o">):</span><span class="kt">void</span>
+<span class="o">{</span>
+
+    <span class="kd">var</span> <span class="n">loader</span><span class="p">:</span><span class="kt">Loader</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Loader</span><span class="o">();</span>
+
+    <span class="c1">// FIXME LoadComplete-Event verarbeiten</span>
+    <span class="c1">// loader.contentLoaderInfo.addEventListener(Event.COMPLETE, load_COMPLETE);</span>
+
+    <span class="c1">// FIXME Fehler verarbeiten</span>
+    <span class="c1">// loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, load_ERROR);</span>
+
+    <span class="kd">var</span> <span class="n">context</span><span class="p">:</span><span class="kt">LoaderContext</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">LoaderContext</span><span class="o">();</span>
+    <span class="n">context</span><span class="o">.</span><span class="na">checkPolicyFile</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="c1">// setzen der Ziel-ApplicationDomain</span>
+    <span class="n">context</span><span class="o">.</span><span class="na">applicationDomain</span> <span class="o">=</span> <span class="n">ApplicationDomain</span><span class="o">.</span><span class="na">currentDomain</span><span class="o">;</span>
+
+    <span class="n">_loader</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="kt">URLRequest</span><span class="o">(</span><span class="n">source</span><span class="o">),</span> <span class="n">context</span><span class="o">);</span>  
+<span class="o">}</span>
+</code></pre></div>
+<p>Wurde die RSL vollständig geladen stehen der ApplicationDomain alle in der Bibliothek 
+vorhandenen Klassen zur Verfügung. Als Bibliothek kann neben SWC-Dateien auch SWF-Dateien 
+verwendet werden.</p>
+
+<p>Bei SWC-Dateien, welche mit Flex erstellt wurden und in einem Flash-Projekt benutzt 
+werden sollen, kann es notwendig sein die SWF-Datei aus der SWC zu extrahieren. Dazu 
+muss die SWC-Datei mit einem Entpackprogramm (7Zip, WinRaR, ...) geöffnet werden und 
+die darin enthalten library.swf extrahiert werden.</p>
+
+
+    
+    <div class="license">
+        <h3>MIT License</h3>
+        <p>
+            Permission is hereby granted, free of charge, to any person obtaining a
+            copy
+            of this software and associated documentation files (the "Software"), to
+            deal
+            in the Software without restriction, including without limitation the
+            rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:
+        </p>
+
+        <p>
+            The above copyright notice and this permission notice shall be included in
+            all copies or substantial portions of the Software.
+        </p>
+
+        <p>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+            THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+            FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+            THE SOFTWARE.
+        </p>
+    </div>
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

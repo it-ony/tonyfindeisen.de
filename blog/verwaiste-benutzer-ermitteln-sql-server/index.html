@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>verwaiste Benutzer ermitteln - SQL Server</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>verwaiste Benutzer ermitteln - SQL Server</h1>
+
+    <p>Wer oft Backups von MS-SQL Datenbanken von einem Server auf einen anderen aufspielt, 
+kennt das folgende Problem: Trotz der Korrekten konfiguration der Benutzerrechte sowohl 
+auf Datenbank als auch auf Serverebene kann der Benutzer nicht auf die Daten zugreifen.</p>
+
+<p>Der MS-SQL Server speichert die Logininformationen für die entsprechende Datenbank in der 
+Datenbank selbst und somit auch in dem erstellten Backup. Wird das Backup von einem 
+Server auf einem anderen Server zurückgespielt, werden die Anmeldeinformationen der 
+Datenbank wiederhergestellt. Wenn der Datenbankbenutzer schon auf dem Server angelegt 
+ist kann zwar der Zugriff für die Datenbank gesetzt werden jedoch erfolgt dieser nicht.</p>
+
+<p>Für den Datenbankadministrator sieht es auf den ersten Blick aus als seien die Rechte 
+korrekt gesetzt, da die Benutzernamen übereinstimmen. Intern verwendet der SQL-Server 
+logischerweise IDs, welche sich auf den Servern unterscheiden.</p>
+
+<p>Mit der gespeicherten Prozedur sp<em>change</em>users_login des SQL-Servers können die nicht 
+übereinstimmenden Anmeldeinformationen der ausgewählten Datenbank angezeigt und 
+korrigiert werden. Das folgende Skript fasst diese Informationen für alle Datenbanken 
+des Servers zusammen. Dazu werden nacheinander alle Datenbanken ausgewählt und nach 
+verwaisten Benutzern abgefragt. Das Ergebnis wird in einen tempöräre Tabelle geschrieben 
+und am Ende ausgegeben.</p>
+<div class="highlight"><pre><code class="sql language-sql" data-lang="sql"><span class="k">DECLARE</span> <span class="o">@</span><span class="n">UNMAPPEDUSER</span> <span class="k">TABLE</span>
+    <span class="p">(</span>
+        <span class="n">DB</span> <span class="n">NVARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">login</span> <span class="n">NVARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span>
+        <span class="n">SID</span> <span class="n">VARBINARY</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span> <span class="k">NULL</span>
+    <span class="p">)</span> 
+
+<span class="k">DECLARE</span> <span class="n">DB</span> <span class="k">CURSOR</span> <span class="k">FOR</span>
+    <span class="k">SELECT</span>
+        <span class="n">name</span>
+    <span class="k">FROM</span>
+        <span class="n">sys</span><span class="p">.</span><span class="n">sysdatabases</span>
+
+<span class="k">OPEN</span> <span class="n">DB</span>
+
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">DBName</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">SID</span> <span class="n">VARBINARY</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">login</span> <span class="n">NVARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+
+<span class="k">FETCH</span> <span class="k">NEXT</span> <span class="k">FROM</span> <span class="n">DB</span>
+    <span class="k">INTO</span> <span class="o">@</span><span class="n">DBName</span>
+
+<span class="n">WHILE</span> <span class="o">@@</span><span class="n">FETCH_STATUS</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">BEGIN</span>
+        <span class="c1">-- change Database</span>
+        <span class="k">EXEC</span><span class="p">(</span><span class="s1">&#39;USE &#39;</span> <span class="o">+</span> <span class="o">@</span><span class="n">DBName</span><span class="p">)</span>
+
+
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">@</span><span class="n">UNMAPPEDUSER</span> 
+            <span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">SID</span><span class="p">)</span>
+        <span class="k">EXEC</span> <span class="n">sp_change_users_login</span> <span class="s1">&#39;Report&#39;</span> 
+
+        <span class="k">UPDATE</span>
+            <span class="o">@</span><span class="n">UNMAPPEDUSER</span>
+        <span class="k">SET</span> 
+            <span class="n">DB</span> <span class="o">=</span> <span class="o">@</span><span class="n">DBName</span>
+        <span class="k">WHERE</span>
+            <span class="n">DB</span> <span class="k">IS</span> <span class="k">NULL</span>
+
+
+        <span class="k">FETCH</span> <span class="k">NEXT</span> <span class="k">FROM</span> <span class="n">DB</span> 
+            <span class="k">INTO</span> <span class="o">@</span><span class="n">DBName</span>
+    <span class="k">END</span>
+
+<span class="k">CLOSE</span> <span class="n">DB</span>
+<span class="k">DEALLOCATE</span> <span class="n">DB</span>
+
+<span class="k">SELECT</span>
+    <span class="o">*</span>
+<span class="k">FROM</span>
+    <span class="o">@</span><span class="n">UNMAPPEDUSER</span>
+</code></pre></div>
+<p>Über die gespeicherte Prozedur können dann die notwendigen Änderungen ausgeführt werden. 
+Der Artikel <a href="http://msdn.microsoft.com/de-de/library/ms174378.aspx">ms174378</a> von 
+Microsoft beschreibt das vorgehen im Detail. Für alle die schnell zum Ziel kommen 
+wollen hier der entsprechende Code.</p>
+<div class="highlight"><pre><code class="sql language-sql" data-lang="sql"><span class="c1">-- wechsel der Datenbank</span>
+<span class="n">USE</span> <span class="o">&lt;</span><span class="n">Datenbank</span><span class="o">&gt;</span>
+
+<span class="c1">-- SIDs gleichsetzen</span>
+<span class="k">EXEC</span> <span class="n">sp_change_users_login</span> <span class="s1">&#39;AUTO_FIX&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;Username&gt;&#39;</span>
+</code></pre></div>
+
+    
+    <div class="license">
+        <h3>MIT License</h3>
+        <p>
+            Permission is hereby granted, free of charge, to any person obtaining a
+            copy
+            of this software and associated documentation files (the "Software"), to
+            deal
+            in the Software without restriction, including without limitation the
+            rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:
+        </p>
+
+        <p>
+            The above copyright notice and this permission notice shall be included in
+            all copies or substantial portions of the Software.
+        </p>
+
+        <p>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+            THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+            FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+            THE SOFTWARE.
+        </p>
+    </div>
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

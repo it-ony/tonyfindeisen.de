@@ -1,0 +1,161 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>reguläre Ausdrücke in XSLT 1.0</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>reguläre Ausdrücke in XSLT 1.0</h1>
+
+    <p>Da der im .NET-Framework enthaltene XSL-Prozessor nur XSLT 1.0 unterstütz können nativ 
+keine regulären Ausdrücke für die Transformation verwendet werden.</p>
+
+<p>Mithilfe von eingebetteten Skripen und den Klassen aus dem Namespace
+<code>System.Text.RegularExpressions</code> können reguläre Ausdrücke auch in XSLT 1.0 unter
+Verwendung des Microsoft Prozessors verwendet werden.</p>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span>
+    <span class="na">xmlns:msxsl=</span><span class="s">&quot;urn:schemas-microsoft-com:xslt&quot;</span> <span class="na">exclude-result-prefixes=</span><span class="s">&quot;msxsl&quot;</span>
+    <span class="na">xmlns:script=</span><span class="s">&quot;urn:my-scripts&quot;</span>
+<span class="nt">&gt;</span>
+    <span class="nt">&lt;xsl:output</span> <span class="na">method=</span><span class="s">&quot;xml&quot;</span> <span class="na">indent=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/*&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;script:getRegex(@myString, &#39;(\w+)\s.*&#39;)&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/xsl:template&gt;</span>
+
+    <span class="nt">&lt;msxsl:script</span> <span class="na">implements-prefix=</span><span class="s">&quot;script&quot;</span> <span class="na">language=</span><span class="s">&quot;VB&quot;</span><span class="nt">&gt;</span>
+        <span class="cp">&lt;![CDATA[</span>
+
+<span class="cp">        public function getRegex(s as string, regEx as string) as string</span>
+<span class="cp">          return System.Text.RegularExpressions.Regex.Match(s, regEx, Text.RegularExpressions.RegexOptions.IgnoreCase).Groups(1).Value</span>
+<span class="cp">        end function</span>
+
+<span class="cp">    ]]&gt;</span>
+    <span class="nt">&lt;/msxsl:script&gt;</span>
+
+<span class="nt">&lt;/xsl:stylesheet&gt;</span>
+</code></pre></div>
+<p>Damit der XSL-Prozessor die Funktionen benutzen darf, muss für XSLT-Setting 
+enableScript aktiviert werden. Der folgende Code erzeugt einen neue Instanz des 
+XSL-Prozessors und setzt die entsprechende Eigenschaft.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&#39;benötigte Namespaces
+Imports System.Xml.Xsl
+
+&#39;Prozessor erstellen 
+Dim xslt As New XslCompiledTransform()
+xslt.Load(XSLTUri, New XsltSettings(False, True), New XmlUrlResolver())
+</code></pre></div>
+
+    
+    <div class="license">
+        <h3>MIT License</h3>
+        <p>
+            Permission is hereby granted, free of charge, to any person obtaining a
+            copy
+            of this software and associated documentation files (the "Software"), to
+            deal
+            in the Software without restriction, including without limitation the
+            rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:
+        </p>
+
+        <p>
+            The above copyright notice and this permission notice shall be included in
+            all copies or substantial portions of the Software.
+        </p>
+
+        <p>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+            THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+            FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+            THE SOFTWARE.
+        </p>
+    </div>
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

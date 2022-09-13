@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>flow.js - eine asynchrone, synchrone Kontrollfluss Bibliothek</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>flow.js - eine asynchrone, synchrone Kontrollfluss Bibliothek</h1>
+
+    <p>Flow.js ist eine Kontrollfluss Bibliothek, welche komplett Test-Driven von mir entwickelt 
+wurde. Die Library kann sowohl im Browser als auf auf einem Node.js server betrieben 
+werden.</p>
+
+<p>Zu den Features zählen:</p>
+
+<ul>
+<li>Sequenz</li>
+<li>Parallel</li>
+<li>Parallel forEach</li>
+<li>Unterbrechung</li>
+</ul>
+
+<p>Die Bibliothek ist unkomprimiert 10kb klein und kommt mit knapp 900 Zeilen Tests, welche 
+ebendfalls in Javascript mit Mocha und Chai geschrieben sind.</p>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">flow</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">seq</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// do something</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nx">par</span><span class="p">({</span>
+        <span class="nx">b</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// do something synchron in parallel ...</span>
+
+            <span class="c1">// end flow on condition</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span> <span class="c1">// end flow after return statement</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">c</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// ... with something asynchron</span>
+
+            <span class="c1">// end flow the asynchron way</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// or cb.end(null, 3) or cb(null, 3, true) or this(null, 3, true)</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">seq</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// this would executed, because either b or c will end the flow</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* this function is called on</span>
+<span class="cm">           * error thrown in synchron method</span>
+<span class="cm">           * error object passed in asynchron method</span>
+<span class="cm">           * this.end() is called</span>
+<span class="cm">           * flow is executed completely</span>
+<span class="cm">        */</span>
+    <span class="p">});</span>
+</code></pre></div>
+<p>Flow.js wurde entwickelt um mehre Server-Anfragen beim Laden von Daten in rAppid.js zu 
+parallelisieren. Mit der fortgeschrittenen Entwicklung von rAppid.js hat sich flow.js 
+als hervorangender Wegbegleiter erwiesen. </p>
+
+<p>Den Quelltext von flow.js findet ihr in meinem Github Repository unter 
+<a href="https://github.com/it-ony/flow.js">https://github.com/it-ony/flow.js</a>. Weiterhin könnt ihr flow.js über npm installieren.</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">npm install -g flow.js
+</code></pre></div>
+
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

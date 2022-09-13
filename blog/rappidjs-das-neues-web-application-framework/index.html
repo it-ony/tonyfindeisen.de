@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>rAppid.js - das neues Web Application Framework</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>rAppid.js - das neues Web Application Framework</h1>
+
+    <p>rAppid.js ist ein auf Javascript und XML basierendes Anwendungsframework, welches 
+Anwendungen komplett im Client (Browser) rendert. Der Server ist nur für das ausliefern 
+von statischen, wiederverwendbaren Javascript Dateien zuständig. Eine rAppid.js bekommt 
+seine Daten immer von einer Datenquelle z.B. einem RestDatasource.</p>
+
+<p>rAppid.js wird seit dem 01. Februar 2012 von mir und Marcus Krejpowicz entwickelt und 
+kann schon beachtilich viele Features hervorweisen. Zu den Hauptfeatures gehören:</p>
+
+<ul>
+<li>Dependency loading</li>
+<li>Shadow DOM</li>
+<li>Code Behind</li>
+<li>Model-View-Binding &amp; View-Model-Binding</li>
+<li>Dependency Injection</li>
+<li>virtuelle Attribute</li>
+</ul>
+
+<p>sowie viele weitere. Die komplette Liste der Features kann unter 
+<a href="http://rappidjs.com/features.html">http://rappidjs.com/features.html</a> eingesehen werden.</p>
+
+<p>rAppid.js Anwendungen laufen komplett im Browser ab und laden ihre Daten dynamisch nach. 
+Da dies aus SEO technischer Sicht eine Katastophe ist, unterstützt rAppid.js das rendern 
+von HTML Snapshots auf einem node.js Server und löst somit das hash-bang problem.</p>
+
+<p>Schaut euch den Quelltext in meinem <a href="https://github.com/it-ony/rAppid.js">github</a> 
+repository an. Eine Beispielanwendung findet ihr live unter 
+<a href="http://todo.rappidjs.com">http://todo.rappidjs.com</a> oder als Quellcode 
+im git von Marcus. </p>
+
+
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

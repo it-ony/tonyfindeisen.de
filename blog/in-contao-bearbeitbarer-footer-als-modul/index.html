@@ -1,0 +1,144 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>bearbeitbarer Footer in Contao als Modul</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script src="/js/modernizr.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body class="menu-fixed">
+
+<div id="wrapper">
+    <nav id="menu">
+    <div class="row">
+        <div class="left">
+            <a href="/" class="logo">
+                <strong>Tony</strong>Findeisen
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hidden-for-small"><a href="/#about">About</a></li>
+                <li class="hidden-for-small"><a href="/#portfolio">Portfolio</a></li>
+                <li class="hidden-for-small"><a href="/#contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="blog">
+
+    
+        <div class="row">
+            <div class="column"><div class="post boxed">
+
+    <h1>bearbeitbarer Footer in Contao als Modul</h1>
+
+    <p>In Contao können Inhalte für eine Seite auf zwei Arten erzeugt werden:</p>
+
+<ol>
+<li>Entweder der Inhalt wird durch ein Modul generiert, welches in dem verwendeten 
+Seitenlayout der Seite an in dem entsprechenden Inhaltsbereich (Kopfzeile, Fußzeile, 
+Hauptspalte, Links, Rechts, eigener Bereich) eingebunden ist oder</li>
+<li>der Inhalt wird durch einen oder mehreren Artikel(n) im entsprechenden Inhaltsbereich 
+angezeigt. Für die Verwendung eines Footers, welcher Seitenunabhängig immer den 
+gleichen Inhalt anzeigen sind die beiden Methoden nicht wirklich praktikabel.</li>
+</ol>
+
+<p>Bei der Verwendung der ersten Methode kommt nur das Modul vom Typ &quot;eigener HTML Code&quot; 
+in Frage. Für die Inhaltsgestaltung wird d.h. ein entsprechendes Modul angelegt und 
+der Inhalt direkt in HTML codiert.</p>
+
+<p>Der zweite Ansatz setzt die Zuweisung des Moduls &quot;Artikel&quot; für die Fußzeile im 
+Seitenlayout vorraus. Der Inhalt des Footers muss für jede Seite als Artikel mit dem 
+Zielbereich &quot;Fußzeile&quot; angelegt werden. Durch Duplizieren der entsprechenden 
+&quot;Footer&quot;-Artikel geht diese Methode einfach von der Hand; erweist sich jedoch als 
+sehr fehleranfällig und aufwändig bei der Seitenneuanlage oder bei 
+Inhaltsänderungen des Footers. Der Änderungsaufwand des Footers kann durch die Verwendung 
+von Artikelaliase minimiert werden.</p>
+
+<h2>Vorraussetzungen</h2>
+
+<p>Die Lösung der folgenden Punkte sind Vorraussetzung für einen praktikable Verwaltung 
+des Footers:</p>
+
+<ul>
+<li>Einbindung des Footers über die Seitenstruktur</li>
+<li>WYSIWYG-Inhaltsverwaltung über das Backend</li>
+<li>Änderung des Inhalts an zentraler Stelle</li>
+</ul>
+
+<h2>Lösungsansatz</h2>
+
+<p>Durch Kombination der beschriebenen Methoden unter der Zuhilfenahme von Insert-Tags 
+kann der Footer im Backend an zentraler Stelle bearbeitet werden. Hier die Anleitung 
+im Telegrammstil:</p>
+
+<ul>
+<li>Erstelle eine neue Seite in der Seitenstruktur, welche weder im Menü noch in der 
+Sitemap angezeigt wird</li>
+<li>Wechsel in die Artikelansicht und Hover mit der Maus über das Bearbeitensymbol des 
+automatisch angelegten Artikels der neuen Seite</li>
+<li>Merke dir die Artikel-ID, welche beim Hovern angezeigt wird (in diesem Beispiel ID 19)</li>
+<li>Erstelle ein neues Modul vom Typ &quot;eigener HTML-Code&quot; mit dem Namen &quot;Footer&quot; und 
+dem Inhalt &quot;&quot;, wobei die 19 durch die gemerkte Artikel-ID 
+ersetzt wird und das Leerzeichen zwischen den schließenden Klammern entfernt werden muss</li>
+<li>Füge deinem Seitenlayout das Modul &quot;Footer&quot; der Fußzeile hinzu</li>
+</ul>
+
+<p>Fertig! Sollte ich auch mal mal bei mir implementieren...</p>
+
+
+    
+</div>
+</div>
+        </div>
+    
+</div>
+
+
+</div>
+
+<footer>
+    <div class="row">
+
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="/rechtliches">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo"></div>
+    </div>
+</footer>
+
+<script>
+    var ga = (function (w, d, s, u, n, a, m) {
+        w['GoogleAnalyticsObject'] = n;
+        w[n] = w[n] || function () {
+            (w[n].q = w[n].q || []).push(arguments)
+        }; w[n].l = 1 * new Date();
+        a = d.createElement(s);
+        m = d.getElementsByTagName(s)[0];
+        a.async = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m);
+
+        return w[n];
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36884636-1', 'tonyfindeisen.de');
+    ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>

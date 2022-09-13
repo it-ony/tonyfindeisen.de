@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/rappidjs-das-neues-web-application-framework</loc>
+        
+        <lastmod>2012-04-16T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/flowjs-eine-asynchrone-synchrone-kontrollfluss-bibliothek</loc>
+        
+        <lastmod>2012-03-08T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/regulaere-ausdruecke-in-xslt-10</loc>
+        
+        <lastmod>2011-04-27T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/verwaiste-benutzer-ermitteln-sql-server</loc>
+        
+        <lastmod>2011-01-16T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/in-contao-bearbeitbarer-footer-als-modul</loc>
+        
+        <lastmod>2010-12-09T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog/rsl-dynamisch-zur-laufzeit-laden-in-as3</loc>
+        
+        <lastmod>2010-12-08T00:00:00Z</lastmod>
+        
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    
+    <url>
+        <loc>https://tonyfindeisen.de/impressum</loc>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de</loc>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/sitemap.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/rechtliches</loc>
+    </url>
+    
+    <url>
+        <loc>https://tonyfindeisen.de/blog</loc>
+    </url>
+    
+</urlset>
