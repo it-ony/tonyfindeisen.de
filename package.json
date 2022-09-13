@@ -17,14 +17,12 @@
   },
   "homepage": "https://github.com/it-ony/tonyfindeisen.de",
   "devDependencies": {
-    "grunt-sass": "~0.13.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt": "~0.4.5",
-    "node-sass": "~0.9.3",
+    "grunt-sass": "~3.0.1",
+    "grunt": "~1.5.3",
+    "node-sass": "^6.0.1",
     "grunt-jekyll": "~0.4.2",
-    "grunt-concurrent": "~0.5.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-autoprefixer": "~0.7.5",
-    "grunt-contrib-uglify": "~0.5.0"
+    "grunt-contrib-cssmin": "~4.0.0",
+    "grunt-autoprefixer": "~3.0.4",
+    "grunt-contrib-uglify": "~5.2.2"
   }
 }
